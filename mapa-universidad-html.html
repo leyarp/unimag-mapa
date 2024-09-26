@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mapa de la Universidad</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; padding: 0; }
+        #mapa-container { position: relative; width: 100%; max-width: 1000px; margin: 0 auto; }
+        #mapa-imagen { width: 100%; height: auto; }
+        .ubicacion { position: absolute; width: 20px; height: 20px; background-color: red; border-radius: 50%; cursor: pointer; }
+        #info-panel { background-color: white; padding: 10px; border: 1px solid #ccc; display: none; position: absolute; }
+    </style>
+</head>
+<body>
+    <div id="mapa-container">
+        <img id="mapa-imagen" src="URL_DE_TU_IMAGEN" alt="Mapa de la Universidad">
+        <!-- Aquí irán los puntos de las ubicaciones -->
+    </div>
+    <div id="info-panel"></div>
+
+    <script>
+        const ubicaciones = [
+            { x: 10, y: 20, nombre: "Biblioteca Central", info: "Abierta de 8am a 10pm" },
+            { x: 30, y: 40, nombre: "Cafetería Principal", info: "Menú variado y económico" },
+            // Añade más ubicaciones según sea necesario
+        ];
+
+        const container = document.getElementById('mapa-container');
+        const infoPanel = document.getElementById('info-panel');
+
+        ubicaciones.forEach(ub => {
+            const punto = document.createElement('div');
+            punto.className = 'ubicacion';
+            punto.style.left = `${ub.x}%`;
+            punto.style.top = `${ub.y}%`;
+            punto.addEventListener('click', () => mostrarInfo(ub));
+            container.appendChild(punto);
+        });
+
+        function mostrarInfo(ubicacion) {
+            infoPanel.innerHTML = `<h3>${ubicacion.nombre}</h3><p>${ubicacion.info}</p>`;
+            infoPanel.style.display = 'block';
+            infoPanel.style.left = `${ubicacion.x}%`;
+            infoPanel.style.top = `${ubicacion.y}%`;
+        }
+    </script>
+</body>
+</html>
